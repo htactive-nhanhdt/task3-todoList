@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task3: Todo list</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <h3>Todo List</h3>
+        </header>
+        <div class="main">
+            <div id="input_board">
+                <input type="text" id="newItem" placeholder="Add new todo here" onkeyup="keyUpEvent(event)">
+                <button onclick="addTodo()">Add</button>
+            </div>
+            <div>
+                <ul id="ListTodo"></ul>
+            </div>
+        </div>
+
+        <section class="updateBoard">
+            <h2>Edit Todo</h2>
+            <div>
+                <input type="text" id="newValue" onkeyup="keyUpEvent(event)">
+                <button onclick="updateItem(idItemEdit)">Update</button>
+            </div>
+        </section>
+
+    </div>
+    <script>     
+       var  Todo = JSON.parse(localStorage.getItem("key"));
+        var idItem = 2;
+        var idItemEdit = 0;
+        function render(Todo) {
+            let htmlList = document.getElementById("ListTodo");
+            let content = Todo.map(item => `<li>
+              <div>
+                <p>${item.name}</p>
+                <div class="btn">
+                   <button onclick="openUpdateBoard(${item.id})">Edit</button>
+                   <button onclick="deleteItem(${item.id})">Delete</button> 
+                </div>   
+              </div>
+            </li>  `
+            );
+            htmlList.innerHTML = content.join(" ")
+        }
+
+        function addTodo() {
+            let input = document.getElementById("newItem");
+            if (input.value.trim() !== "") {
+                idItem++;
+                let newTodo = { id: idItem, name: input.value, completed: false };
+                Todo.push(newTodo);
+                localStorage.setItem("key", JSON.stringify(Todo))
+                render(Todo);
+                input.value = " ";
+            } else {
+                alert("No empty plz")
+            }
+        }
+        function deleteItem(id) {
+            let todos = Todo.filter(item => item.id !== id);
+            Todo = todos;
+            localStorage.setItem("key", JSON.stringify(Todo))
+            render(Todo);
+        }
+
+        function openUpdateBoard(id) {
+            let board = document.getElementsByClassName("updateBoard");
+            board[0].style.display = "block";
+            idItemEdit = id;
+        }
+        function updateItem(Itemid) {
+            let inputNew = document.getElementById("newValue");
+            let newValue = inputNew.value;
+            if (newValue.trim() !== "") {
+                let itemNeedEdit = Todo.find(item => item.id == Itemid)
+                itemNeedEdit.name = newValue;
+                localStorage.setItem("key", JSON.stringify(Todo))
+                let board = document.getElementsByClassName("updateBoard");
+                board[0].style.display = "none";
+                render(Todo);
+            }
+            else {
+                alert("No empty todo plz")
+            }
+        }
+
+        function keyUpEvent(event) {
+            if (event.target.id === "newItem") {
+                if (event.key === "Enter") {
+                    addTodo();
+                }
+            }
+            else {
+                if (event.key === "Enter") {
+                    updateItem(idItemEdit);
+                }
+            }
+        }
+        render(Todo);
+
+    </script>
+</body>
+
+</html>

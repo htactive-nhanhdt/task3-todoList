@@ -1,0 +1,76 @@
+p {
+    margin: 0;
+}
+button {
+    background-color: brown;
+    font-size: 1em;
+    padding: 3px 3px;
+}
+.app {
+    width: 50%;
+    margin: 100px auto;   
+    background: linear-gradient(90deg, rgba(202,231,208,1) 53%, rgba(0,212,255,1) 100%, rgba(2,0,36,1) 100%);
+    border:  solid salmon;
+}
+header h3 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.main {
+    width: 95%;
+    margin: 0 auto;
+}
+.main #input_board {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+.main #input_board input {
+    width: 80%;
+    padding: 5px 10px;
+}
+.main #ListTodo li {
+    list-style-type: decimal;
+}
+.main #ListTodo li+li {
+    padding-top: 10px;
+}
+.main #ListTodo li div{
+    display: flex;
+    justify-content: space-between; 
+}
+.main #ListTodo li p {
+    margin-left: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.updateBoard {
+    display: none;
+    width: 22%;  
+    height: 130px;  
+    position: fixed;
+    top:150px;
+    right: 20px;
+    background: linear-gradient(90deg, rgba(202,231,208,1) 53%, rgba(0,212,255,1) 100%, rgba(2,0,36,1) 100%);
+    border:  solid salmon;
+}
+.updateBoard h2 {
+    text-align: center;
+    text-transform: uppercase;
+    
+}
+.updateBoard div {
+    display: flex;
+    justify-content:space-around;
+}
+.updateBoard input {
+    padding: 5px;
+    width: 70%;
+}
+
+
