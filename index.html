@@ -27,14 +27,14 @@
         <section class="updateBoard">
             <h2>Edit Todo</h2>
             <div>
-                <input type="text" id="newValue" onkeyup="keyUpEvent(event)">
+                <input type="text" id="newValue" onkeyup="keyUpEvent(event)" placeholder="Update new Item">
                 <button onclick="updateItem(idItemEdit)">Update</button>
             </div>
         </section>
 
     </div>
-    <script>     
-       var  Todo = JSON.parse(localStorage.getItem("key"));
+    <script>
+        var Todo = JSON.parse(localStorage.getItem("key"));
         var idItem = 2;
         var idItemEdit = 0;
         function render(Todo) {
@@ -78,10 +78,11 @@
             idItemEdit = id;
         }
         function updateItem(Itemid) {
+            let itemNeedEdit = Todo.find(item => item.id == Itemid)
             let inputNew = document.getElementById("newValue");
             let newValue = inputNew.value;
+
             if (newValue.trim() !== "") {
-                let itemNeedEdit = Todo.find(item => item.id == Itemid)
                 itemNeedEdit.name = newValue;
                 localStorage.setItem("key", JSON.stringify(Todo))
                 let board = document.getElementsByClassName("updateBoard");
